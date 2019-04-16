@@ -8,6 +8,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Blog');
 require('./services/passport');
+require('./services/cache');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -24,6 +25,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// register event handlers
 require('./routes/authRoutes')(app);
 require('./routes/blogRoutes')(app);
 
