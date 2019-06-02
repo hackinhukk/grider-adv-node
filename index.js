@@ -17,11 +17,12 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(
-  cookieSession({
+  cookieSession({  // responsible for maintaining a session on incoming requests, parses cookie and put session object into JS object req.session
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
 );
+// passport responsible for entire google oauth process.
 app.use(passport.initialize());
 app.use(passport.session());
 
