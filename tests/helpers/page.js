@@ -61,6 +61,13 @@ class CustomPage {
       }).then(res => res.json());
     }, path, data);
   }
+
+  execRequests(actions) {
+    return Promise.all(actions.map(({ method, path, data }) => { // Promise.all waits for all promises to resolve before doing anything else, also takes all promises down to one large promise and when it resolves, it means were ready to inspect everything and make sure it is says "error: you must login!"
+      return this[method](path, data);  // lecture 120 25:45.  Passing path and data into class method (either get or post), if data is null, not a problem it is just ignored.  Returns an array of Promises, promises represent the runnig evaluate function that is being executed in current chromium instance.
+    })
+    );
+  }
 }
 
 module.exports = CustomPage;

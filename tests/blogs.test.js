@@ -65,6 +65,30 @@ describe('When logged in', async () => {
 });
 
 describe('User is not logged in', async () => {
+  const actions = [
+    {
+      method: 'get',
+      path: '/api/blogs'
+    },
+    {
+      method: 'post',
+      path: '/api/blogs',
+      data: {
+        title: 'T',
+        content: 'C'
+      }
+    }
+  ];
+
+  test('Blog related actions are prohibited', async () => {
+    const results = await page.execRequests(actions);
+
+    for (let result of results) {
+      expect(result).toEqual({ error: 'You must log in!' });
+    }
+  });
+});
+/*
   test('User cannot create blog posts', async () => {
     const result = await page.post('/api/blogs', { tite: 'T', content: 'NT' })
 
@@ -74,5 +98,4 @@ describe('User is not logged in', async () => {
     const result = await page.get('/api/blogs');
 
     expect(result).toEqual({ error: 'You must log in!'});
-  });
-});
+  });*/
