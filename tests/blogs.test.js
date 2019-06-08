@@ -17,7 +17,7 @@ describe('When logged in', async () => {
     await page.login();
     await page.click('a.btn-floating');
   });
-
+// removalable comment
   test('can see blog create form', async () => {
     const label = await page.getContentsOf('form label');
 
